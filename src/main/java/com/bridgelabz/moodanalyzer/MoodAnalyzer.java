@@ -1,33 +1,51 @@
 package com.bridgelabz.moodanalyzer;
 
 public class MoodAnalyzer {
-    public String message;
-      //constructor is used to pass the mood message
+    String message;
 
-      //@param message:passed as parameter in constructor
-
-    public MoodAnalyzer(String message) {
-        this.message = message;
-        analyzeMood();
+    MoodAnalyzer() {
+        this.message = "";
     }
 
+    MoodAnalyzer(String message) {
+        this.message = message;
+    }
 
-     // method is used to return either sad or happy
-     //@return sad/happy message
+    String analyseMood() {
+        return analyseMood(message);
+    }
 
-    public String analyzeMood() {
-        /**
-         * try :where the implementation is done,so it return either sad/happy
-         * if message is entered is invalid, then null pointer exception is occured and catch block handles it
-         */
+    String analyseMood(String message) {
+
+        String messageToReturn = "";
+
         try {
-            if (message.contains("sad")) {
-                return "SAD";
-            }return "HAPPY";
 
+            if (message == "") {
+                throw new MoodAnalysisException("Empty Mood");
+            }
+
+            String split[] = message.split(" ");
+            for (String var : split) {
+                if (var.equalsIgnoreCase("Sad")) {
+                    messageToReturn = var;
+                    break;
+                } else if (var.equalsIgnoreCase("Happy")) {
+                    messageToReturn = var;
+                    break;
+                }
+            }
         } catch (NullPointerException e) {
-            return "HAPPY";
+            messageToReturn = "Happy";
+        } catch (MoodAnalysisException e) {
+            return e.getMessage();
         }
+
+        if (messageToReturn.equals("")) {
+            return "Happy";
+        }
+
+        return messageToReturn;
     }
 }
 
