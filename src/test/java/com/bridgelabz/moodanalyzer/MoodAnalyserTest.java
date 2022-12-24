@@ -16,4 +16,10 @@ import org.junit.jupiter.api.Test;
             String result1 = moodAnalyser.analyzeMood();
             Assertions.assertEquals("Happy", result1);
         }
+        @Test
+        public void testMoodAnalysis_whenMoodIsNull() { //tc 2.1
+            MoodAnalyzer moodAnalyzer = new MoodAnalyzer(null);
+            String mood2 = moodAnalyzer.analyzeMood();
+            Assertions.assertEquals(mood2,"HAPPY");
+        }
 }
